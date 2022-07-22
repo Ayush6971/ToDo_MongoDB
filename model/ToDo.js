@@ -5,9 +5,9 @@ const Todoschema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        email_: {
-            type: String,
-            required: true,
+        user: {
+            type: mongoose.Types.ObjectId,
+            ref: "User",
         },
         isDone: {
             type: Boolean,

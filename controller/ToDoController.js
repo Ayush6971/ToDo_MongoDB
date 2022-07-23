@@ -22,7 +22,7 @@ const addTodo = async (req, res) => {
         });
 
     } catch (error) {
-        console.log("🚀 ~ file: ToDoController.js ~ line 25 ~ addTodo ~ error", error)
+        console.error("🚀 ~ file: ToDoController.js ~ line 25 ~ addTodo ~ error", error)
         throw new Error(error);
     }
 }
@@ -49,7 +49,7 @@ const getTodoById = async (req, res) => {
         });
 
     } catch (error) {
-        console.log("🚀 ~ file: ToDoController.js ~ line 25 ~ addTodo ~ error", error)
+        console.error("🚀 ~ file: ToDoController.js ~ line 25 ~ addTodo ~ error", error)
         throw new Error(error);
     }
 }
@@ -73,7 +73,7 @@ const getTodoByUserId = async (req, res) => {
         });
 
     } catch (error) {
-        console.log("🚀 ~ file: ToDoController.js ~ line 25 ~ addTodo ~ error", error)
+        console.error("🚀 ~ file: ToDoController.js ~ line 25 ~ addTodo ~ error", error)
         throw new Error(error);
     }
 }
@@ -92,7 +92,7 @@ const updateTodo = async (req, res) => {
         return res.status(200).send({ message: 'Todo Updated successfully!' });
 
     } catch (error) {
-        console.log("🚀 ~ file: ToDoController.js ~ line 25 ~ addTodo ~ error", error)
+        console.error("🚀 ~ file: ToDoController.js ~ line 25 ~ addTodo ~ error", error)
         throw new Error(error);
     }
 }
@@ -113,7 +113,7 @@ const deleteTodo = async (req, res) => {
         return res.status(200).send({ message: 'Todo deleted successfully!' });
 
     } catch (error) {
-        console.log("🚀 ~ file: ToDoController.js ~ line 25 ~ addTodo ~ error", error)
+        console.error("🚀 ~ file: ToDoController.js ~ line 25 ~ addTodo ~ error", error)
         throw new Error(error);
     }
 }
@@ -127,13 +127,13 @@ const markAsDone = async (req, res) => {
         if (!todoId || !isDone) return res.status(423).send({ message: 'Please fill all required fields!' });
 
         const updateTodo = await todoModel.findOneAndUpdate({ _id: todoId }, { $set: { isDone } })
-        console.log("🚀 ~ file: ToDoController.js ~ line 90 ~ updateTodo ~ updateTodo", updateTodo)
+        console.error("🚀 ~ file: ToDoController.js ~ line 90 ~ updateTodo ~ updateTodo", updateTodo)
 
         if (!updateTodo) return res.status(200).send({ message: 'Something went wrong, Please try again!' });
         return res.status(200).send({ message: 'Todo Marked As Done successfully!' });
 
     } catch (error) {
-        console.log("🚀 ~ file: ToDoController.js ~ line 25 ~ addTodo ~ error", error)
+        console.error("🚀 ~ file: ToDoController.js ~ line 25 ~ addTodo ~ error", error)
         throw new Error(error);
     }
 }

@@ -108,8 +108,8 @@ const deleteTodo = async (req, res) => {
         const deleteTodo = await todoModel.findOneAndDelete({
             _id: todoId
         });
-
         if (!deleteTodo) return res.status(400).send({ message: "Something went wrong!" });
+
         return res.status(200).send({ message: 'Todo deleted successfully!' });
 
     } catch (error) {
@@ -127,9 +127,8 @@ const markAsDone = async (req, res) => {
         if (!todoId || !isDone) return res.status(423).send({ message: 'Please fill all required fields!' });
 
         const updateTodo = await todoModel.findOneAndUpdate({ _id: todoId }, { $set: { isDone } })
-        console.error("🚀 ~ file: ToDoController.js ~ line 90 ~ updateTodo ~ updateTodo", updateTodo)
-
         if (!updateTodo) return res.status(200).send({ message: 'Something went wrong, Please try again!' });
+
         return res.status(200).send({ message: 'Todo Marked As Done successfully!' });
 
     } catch (error) {

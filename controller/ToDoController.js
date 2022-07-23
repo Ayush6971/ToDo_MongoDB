@@ -11,11 +11,9 @@ const addTodo = async (req, res) => {
         const createTodo = await todoModel.create({
             todo, user: requestUser.id, isDone: false
         });
-        if (!createTodo) {
-            return res.status(400).send({
-                message: "Something went wrong!",
-            });
-        }
+        if (!createTodo) return res.status(400).send({
+            message: "Something went wrong!",
+        });
 
         return res.status(200).send({
             message: `Wohoo! Your Todo is added successfully!`, todoData: createTodo
@@ -38,11 +36,9 @@ const getTodoById = async (req, res) => {
         const findTodoById = await todoModel.findOne({
             _id: todoId
         });
-        if (!findTodoById) {
-            return res.status(400).send({
-                message: "ToDo not Found!",
-            });
-        }
+        if (!findTodoById) return res.status(400).send({
+            message: "ToDo not Found!",
+        });
 
         return res.status(200).send({
             toDo: findTodoById
@@ -62,11 +58,9 @@ const getTodoByUserId = async (req, res) => {
         const findTodoByUserId = await todoModel.find({
             user: requestUser.id,
         });
-        if (!findTodoByUserId) {
-            return res.status(400).send({
-                message: "ToDo not Found!",
-            });
-        }
+        if (!findTodoByUserId) return res.status(400).send({
+            message: "ToDo not Found!",
+        });
 
         return res.status(200).send({
             userToDo: findTodoByUserId

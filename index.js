@@ -23,23 +23,19 @@ mongoose.connect(
     }
 );
 
-app.use(
-    express.urlencoded({
-        extended: true
-    })
-);
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-const PORT = process.env.PORT;
 
 // routes
 require("./routes/r-index")(app);
 
+const PORT = process.env.PORT;
+
 app.get("/", (req, res) => {
-    res.render("login", { res });
+    return res.status(200).send({ message: "Welcome to ToDo list App!" });
 });
 
 app.listen(PORT, () => {
-    console.error(`App is Running at http://localhost:${PORT}`);
+    console.info(`App is Running at http://localhost:${PORT}`);
 });

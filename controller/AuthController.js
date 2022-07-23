@@ -1,9 +1,10 @@
 const user = require("../models/user");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const signUp = async (req, res) => {
     try {
+
         const { email, password, confirmPassword } = req.body;
         if (!email || !password || !confirmPassword) {
             return res.status(400).send({
@@ -35,21 +36,9 @@ const signUp = async (req, res) => {
                 message: "Something went wrong!",
             });
         }
-        const id = createUser._id;
-        const token = jwt.sign({ id: id }, process.env.JWT_SECRET, {
-            expiresIn: process.env.JWT_EXPIRES_IN,
-        });
 
-        const cookieOptions = {
-            expires: new Date(
-                Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
-            ),
-            httpOnly: true, //To prevent from XSS attack
-        };
-
-        res.cookie("jwt", token, cookieOptions);
         return res.status(200).send({
-            message: `Wohoo! you have registered with us Successfully.`,
+            message: `Wohoo! you have registered with us Successfully, Now please login`,
         });
 
     } catch (error) {
@@ -71,7 +60,7 @@ const signIn = async (req, res) => {
         if (!getUserDetails) return res.status(404).send({ message: "User not found!" })
 
 
-        if (!(await bcrypt.compare(password, checkUser.password))) {
+        if (!(await bcrypt.compare(password, getUserDetails.password))) {
             return res
                 .status(401)
                 .send({ message: "Password is Incorrect" });

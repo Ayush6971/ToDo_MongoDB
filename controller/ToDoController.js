@@ -84,7 +84,7 @@ const updateTodo = async (req, res) => {
         if (!requestUser) return res.status(401).send({ message: 'Not logged in' });
 
         const { todo, todoId } = req.body;
-        if (!todoId || !todo) return res.status(423).send({ message: 'Please fill all required fields!' });
+        if (!todoId || !todo) return res.status(422).send({ message: 'Please fill all required fields!' });
 
         const updateTodo = await todoModel.findOneAndUpdate({ _id: todoId }, { $set: { todo: todo } })
 
@@ -124,7 +124,7 @@ const markAsDone = async (req, res) => {
         if (!requestUser) return res.status(401).send({ message: 'Not logged in' });
 
         const { isDone, todoId } = req.body;
-        if (!todoId || !isDone) return res.status(423).send({ message: 'Please fill all required fields!' });
+        if (!todoId || !isDone) return res.status(422).send({ message: 'Please fill all required fields!' });
 
         const updateTodo = await todoModel.findOneAndUpdate({ _id: todoId }, { $set: { isDone } })
         if (!updateTodo) return res.status(200).send({ message: 'Something went wrong, Please try again!' });

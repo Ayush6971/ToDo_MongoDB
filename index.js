@@ -33,8 +33,8 @@ app.use(cookieParser());
 
 const PORT = process.env.PORT;
 
-//routes
-app.use(require("./routes/r-ToDo"));
+// routes
+require("./routes/r-index")(app);
 
 app.get("/", (req, res) => {
     res.render("login", { res });

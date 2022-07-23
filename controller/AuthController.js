@@ -92,7 +92,7 @@ const signIn = async (req, res) => {
 const signOut = (req, res) => {
     try {
         res.clearCookie("jwt");
-        res.json({
+        return res.json({
             message: "User Logged Out Successfully",
         });
     } catch (error) {

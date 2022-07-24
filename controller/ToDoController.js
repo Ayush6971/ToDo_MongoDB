@@ -3,7 +3,7 @@ const todoModel = require('../models/todo');
 const addTodo = async (req, res) => {
     try {
         const requestUser = req.user;
-        if (!requestUser || requestUser.id) return res.status(401).send({ message: 'Not logged in' });
+        if (!requestUser || !requestUser.id) return res.status(401).send({ message: 'Not logged in' });
 
         const { todo } = req.body;
         if (!todo) return res.status(422).send({ message: 'Please fill all required fields!' });
@@ -28,7 +28,7 @@ const addTodo = async (req, res) => {
 const getTodoById = async (req, res) => {
     try {
         const requestUser = req.user;
-        if (!requestUser || requestUser.id) return res.status(401).send({ message: 'Not logged in' });
+        if (!requestUser || !requestUser.id) return res.status(401).send({ message: 'Not logged in' });
 
         const { todoId } = req.query;
         if (!todoId) return res.status(422).send({ message: 'Please fill all required fields!' });
@@ -53,7 +53,7 @@ const getTodoById = async (req, res) => {
 const getTodoByUserId = async (req, res) => {
     try {
         const requestUser = req.user;
-        if (!requestUser || requestUser.id) return res.status(401).send({ message: 'Not logged in' });
+        if (!requestUser || !requestUser.id) return res.status(401).send({ message: 'Not logged in' });
 
         const findTodoByUserId = await todoModel.find({
             user: requestUser.id,
@@ -75,7 +75,7 @@ const getTodoByUserId = async (req, res) => {
 const updateTodo = async (req, res) => {
     try {
         const requestUser = req.user;
-        if (!requestUser || requestUser.id) return res.status(401).send({ message: 'Not logged in' });
+        if (!requestUser || !requestUser.id) return res.status(401).send({ message: 'Not logged in' });
 
         const { todo, todoId } = req.body;
         if (!todoId || !todo) return res.status(422).send({ message: 'Please fill all required fields!' });
@@ -94,7 +94,7 @@ const updateTodo = async (req, res) => {
 const deleteTodo = async (req, res) => {
     try {
         const requestUser = req.user;
-        if (!requestUser || requestUser.id) return res.status(401).send({ message: 'Not logged in' });
+        if (!requestUser || !requestUser.id) return res.status(401).send({ message: 'Not logged in' });
 
         const { todoId } = req.query;
         if (!todoId) return res.status(422).send({ message: 'Please fill all required fields!' });
@@ -115,7 +115,7 @@ const deleteTodo = async (req, res) => {
 const markAsDone = async (req, res) => {
     try {
         const requestUser = req.user;
-        if (!requestUser || requestUser.id) return res.status(401).send({ message: 'Not logged in' });
+        if (!requestUser || !requestUser.id) return res.status(401).send({ message: 'Not logged in' });
 
         const { isDone, todoId } = req.body;
         if (!todoId || !isDone) return res.status(422).send({ message: 'Please fill all required fields!' });
